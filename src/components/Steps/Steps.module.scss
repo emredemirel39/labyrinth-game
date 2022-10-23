@@ -1,0 +1,15 @@
+.steps{
+    display: grid;
+    grid-template-columns: repeat(5, 44px);
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+}
+
+.step{
+    background-color: rgb(80, 114, 219);
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

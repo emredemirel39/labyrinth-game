@@ -1,0 +1,17 @@
+.header{
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span{
+        width: 120px;
+        height: 3px;
+        background-color: rgb(101, 167, 198);
+    }
+
+    h3{
+        padding: 2px 20px;
+        background-color: orange;
+    }
+}
