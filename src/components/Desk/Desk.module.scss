@@ -6,6 +6,22 @@
     align-items: center;
 }
 
+.desk-controller{
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin: 20px 0;
+
+    button{
+        cursor: pointer;
+        padding: 4px 8px;
+        outline: none;
+        border: none;
+        background-color: rgb(111, 220, 95);
+        color: white;
+    }
+}
+
 .desk{
     display: flex;
     flex-wrap: wrap;

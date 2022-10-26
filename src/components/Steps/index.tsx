@@ -43,6 +43,4 @@ const Steps = () => {
   )
 }
 
-export default Steps
-
-//           {gameState.allDirections?.map((d, i) => <span key={i}>{d}</span>)}
+export default Steps;

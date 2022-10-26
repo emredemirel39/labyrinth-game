@@ -9,6 +9,10 @@
     height: 100vh;
     overflow: hidden;
     background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 20px;
 }
 
 .container{

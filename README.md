@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## TASK
+
+Create the following labyrinth game using React, Redux and Typescript:
+https://drive.google.com/file/d/1NRMVNcn9XbOWPKNrbzDW0sE_jr36rVka/view
+
 ## Available Scripts
 
 In the project directory, you can run:

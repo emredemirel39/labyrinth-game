@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { BsHandThumbsUpFill, BsFillHandThumbsDownFill } from 'react-icons/bs';
-import { getAvaibleDirections, getBeginingBox, getDirection, getNextBox } from '../../game';
+import React, { useRef } from 'react';
 import { increaseTurnNumber, setAllDirections, setBeginingBox, setCurrentBox, setDirection, setEndTurn, setResetGame, setScore, setUsersChoice } from '../../redux/gameSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { colValues, rowValues, tableRows } from '../../utils';
@@ -12,7 +10,7 @@ const Desk = () => {
     const gameState = useAppSelector(state => state.game);
 
     const boxRef = useRef<Array<HTMLTableDataCellElement | null>>([]);
-    const testRef = useRef<Array<HTMLTableDataCellElement | null>>([]);
+    const tBodyRef = useRef<HTMLTableSectionElement>(null);
 
     const handleClick = (e: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>) => {
 
@@ -35,9 +33,10 @@ const Desk = () => {
             e.stopPropagation();
             e.nativeEvent.stopImmediatePropagation();
 
-            e.currentTarget.innerHTML = '<span>Emre</span>';
-            //boxRef.current.forEach(b => b!.innerHTML = 'Ere');
-            //testRef.current.forEach(t => t!.innerHTML = 'Emre')
+
+            //e.currentTarget.innerHTML = '';
+            //boxRef.current.forEach(b => b!.innerHTML = '');
+            tBodyRef.current!.querySelectorAll('td').forEach(td => td.innerHTML = '')
             dispatch(setResetGame());
             startGame();
         }, 2000);
@@ -72,7 +71,6 @@ const Desk = () => {
     
                 turnNumber++;
                 startTurn();
-                console.log(turnNumber);
     
                 if (turnNumber === 10) {
                     clearInterval(intr);
@@ -84,9 +82,9 @@ const Desk = () => {
 
     return (
         <div className={`${styles['desk-wrapper']} container`}>
-        <div>
+        <div className={styles['desk-controller']}>
             <button onClick={startGame}>Start game</button>
-                <span>Score: { gameState.score }</span>
+            <span>Score: { gameState.score }</span>
         </div>
       <table className={styles["desk"]}>
           <thead className={styles['desk__title-hor']}>
@@ -97,9 +95,9 @@ const Desk = () => {
           <thead>
               {rowValues.map(v => <tr key={v} ><th className={styles['desk__title-vert']}>{v}</th></tr> )}
           </thead>
-          <tbody className={styles['desk__content']}>
+          <tbody ref={tBodyRef} className={styles['desk__content']}>
               {tableRows.map((row, i) => {
-                  return <tr ref={el => testRef.current[i]} className={styles['desk__row']} key={i}>{row.map((col, idx) => (
+                  return <tr className={styles['desk__row']} key={i}>{row.map((col, idx) => (
                        <td className={styles['desk__col']} ref={ el => boxRef.current[idx] = el} onClick={e => handleClick(e)} data-label={col} key={col}>
                           {gameState.beginingBox === col && 'START'}
                        </td>
@@ -111,106 +109,4 @@ const Desk = () => {
   )
 }
 
-export default Desk
-
-
-
-
-/*
-import React from 'react';
-import styles from './Desk.module.scss';
-
-const Desk = () => {
-
-    const colValues = ['A', 'B', 'C'];
-    const rowValues = ['1', '2', '3'];
-
-    const allBoxes: string [] = [];
-
-    colValues.forEach(item => {
-        rowValues.forEach(item2 => {
-            allBoxes.push(item + item2) // concatenate two items
-        });
-    });
-
-  return (
-      <div className={styles["desk"]}>
-          <div className={styles['desk__title-hor']}>
-              {colValues.map(v => <span key={v}>{v}</span> )}
-          </div>
-          <div className={styles['desk__title-vert']}>
-              {rowValues.map(v => <span key={v}>{v}</span> )}
-          </div>
-          <div className={styles['desk__content']}>
-              {allBoxes.map(box => <span data-val={box} key={box}>{box}</span> )}
-          </div>
-    </div>
-  )
-}
-
-export default Desk
-
-
-
-
-
- const startTurn = () => {
-        setDirection(getDirection(currentBox));
-        console.log(direction);
-        setCurrentBox(getNextBox(currentBox, direction));
-
-    };
-
-    const startGame = () => {
-
-        setCurrentBox(beginingBox);
-        setStartFlag(currentBox);
-
-        do {
-            startTurn();
-        } while (turnNumber < 10);
-
-        console.log('Son kutu', currentBox);
-    }
-
-
-
-
-
-
-
-    const startGame = () => {
-
-        let turnNumber = 0;
-
-        const intr = setInterval(() => {
-
-            turnNumber++;
-            startTurn();
-            console.log(turnNumber);
-
-            if (++turnNumber === 10) {
-                clearInterval(intr)
-            }
-            
-        }, 2000);
-    }
-
-
-
-
-
-
-
-    const startGame = () => {
-
-        let turnNumber = 0;
-
-        while (turnNumber < 10) {
-            turnNumber++;
-            startTurn();
-        }
-
-    }
-
-*/
+export default Desk;
